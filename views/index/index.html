@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue-slot学习笔记</title>
+	<meta name="viewport" content="width=decive-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script type="text/javascript" src="http://static.5755.com/script/dist/lib/jquery.seajs.js"></script>
+<script type="text/javascript" src="http://cdn.staticfile.org/socket.io/1.3.7/socket.io.js"></script> 
+</head>
+<body>
+  <%- data %>
+  <%= title %>
+  <div id="app">
+    <h1>hello App</h1>
+    <p>
+      <router-link to="/foo">Go to Foo</router-link>
+      <router-link to="/bar">Go to Bar</router-link>
+    </p>
+    <router-view></router-view>
+  </div>
+
+  <script type="text/javascript">
+    var Foo = { template: '<div>foo</div>'};
+    var Bar = { template: '<div>bar</div>'};
+
+    var routes = [
+      { path: '/foo', component: Foo},
+      { path: '/bar', component: Bar}
+    ];
+    var router = new VueRouter({"routes":routes});
+
+    //从而让整个应用都有理由功能
+    var app = new Vue({
+      'el': "#app",
+      "router":router
+    });
+  </script>
+
+  <button onclick="a()">按钮</button>
+  <div id="ultext"></div>
+  <script type="text/javascript">  
+    var socket = io();  
+    function a(){  
+        socket.emit('click1');  
+    }  
+  
+    //监听click2事件  
+    socket.on('click2', function(data){  
+        var htmldatas = data.datas;  
+        var html = '';  
+        for (var i = 0; i < htmldatas.length; i++) {  
+            var htmldata = htmldatas[i];  
+            html += '<li>'+htmldata+'</li>';  
+        }  
+        document.getElementById('ultext').innerHTML = html;  
+    })  
+  </script>
+</body>
+</html>
