@@ -76,4 +76,48 @@ router.post('/repairbill/status', function(req, res, next) {
 	res.end();
 });
 
+/* 商家名称模糊搜索 */
+router.post('/senderSearch', function(req, res, next) {
+	var _data = req.body,
+		mock = null;
+	// console.log(_data) 可以在控制台看到我们传给后端的参数
+	if (_data.error) {
+		notifierMsg.errorMsg(res);
+		return false;
+	}
+
+	mock = Mock.mock({
+		"list": [
+		{
+	        "shopName": "发货商家2",
+	        "userName": "发货人2",
+	        "phone": "18810278138",
+	        "province": "北京市",
+	        "city": "市辖区",
+	        "area": "东城区",
+	        "addressDetail": "天安门"
+	    },
+	    {
+	        "shopName": "发货商家1",
+	        "userName": "发货人1",
+	        "phone": "18810278138",
+	        "province": "北京市",
+	        "city": "市辖区",
+	        "area": "东城区",
+	        "addressDetail": "天安门"
+	    }
+		]
+	});
+
+	//返回结果给ajax
+	res.send({
+		'resultCode': '0000',
+		resultData: mock,
+		"resultDesc": "SUCCESS"
+	});
+	//关闭请求
+	res.end();
+});
+
+
 module.exports = router;
