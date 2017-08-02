@@ -67,7 +67,7 @@ router.post('/repairbill/status', function(req, res, next) {
 
 	//返回结果给ajax
 	res.send({
-		'resultCode': '0000',
+		'resultCode': '0',
 		resultData: {
 			mock,
 		},
@@ -77,10 +77,10 @@ router.post('/repairbill/status', function(req, res, next) {
 });
 
 /* 商家名称模糊搜索 */
-router.post('/senderSearch', function(req, res, next) {
+router.get('/sender/fuzzyQuery', function(req, res, next) {
 	var _data = req.body,
 		mock = null;
-	// console.log(_data) 可以在控制台看到我们传给后端的参数
+	console.log(_data) //可以在控制台看到我们传给后端的参数
 	if (_data.error) {
 		notifierMsg.errorMsg(res);
 		return false;
@@ -111,7 +111,93 @@ router.post('/senderSearch', function(req, res, next) {
 
 	//返回结果给ajax
 	res.send({
-		'resultCode': '0000',
+		'resultCode': '0',
+		resultData: mock,
+		"resultDesc": "请求失败"
+	});
+	//关闭请求
+	res.end();
+});
+/* 提交新建车配任务*/
+router.post('/order/create', function(req, res, next) {
+	var _data = req.body,
+		mock = null;
+	// console.log(_data) //可以在控制台看到我们传给后端的参数
+	if (_data.error) {
+		notifierMsg.errorMsg(res);
+		return false;
+	}
+
+	mock = Mock.mock({
+
+	});
+
+	//返回结果给ajax
+	res.send({
+		'resultCode': '0',
+		resultData: [],
+		"resultDesc": "SUCCESS"
+	});
+	//关闭请求
+	res.end();
+});
+/* 车配任务列表 */
+router.post('/order/list', function(req, res, next) {
+	var _data = req.body,
+		mock = null;
+	console.log(_data) //可以在控制台看到我们传给后端的参数
+	if (_data.error) {
+		notifierMsg.errorMsg(res);
+		return false;
+	}
+
+	mock = Mock.mock({
+		"total": 50,
+		"list": [
+			{
+		        "orderNo": "123456",
+		        "address": "发货地址111",
+		        "orderStatus": 1,
+		        "driverName": "司机嘟嘟",
+		        "driverPhone": "13612541414",
+		        "phone": "发货15880274595",
+		        "receiversInfoList": [
+		          {
+		            "address": "近江时代大厦",
+		            "userName": "收货商家1"
+		          },
+		          {
+		            "address": "近江时代大厦222",
+		            "userName": "收货商家222"
+		          }
+		        ]
+		      },
+		      {
+		        "orderNo": "2223456",
+		        "address": "发货地址111",
+		        "orderStatus": 2,
+		        "driverName": "司机嘟嘟",
+		        "driverPhone": "13612541414",
+		        "phone": "发货15880274595",
+		        "receiversInfoList": [
+		          {
+		            "address": "近江时代大厦",
+		            "userName": "收货商家1"
+		          },
+		          {
+		            "address": "近江时代大厦222",
+		            "userName": "收货商家222"
+		          }
+		        ]
+      		}
+		],
+		"pageNo": 1,
+	    "pageSize": 10
+	});
+
+	//返回结果给ajax
+	res.send({
+		'resultCode': '0',
 		resultData: mock,
 		"resultDesc": "SUCCESS"
 	});
@@ -119,5 +205,68 @@ router.post('/senderSearch', function(req, res, next) {
 	res.end();
 });
 
+/* 取消订单 */
+router.post('/order/cancel', function(req, res, next) {
+	var _data = req.body,
+		mock = null;
+	console.log(_data) //可以在控制台看到我们传给后端的参数
+	if (_data.error) {
+		notifierMsg.errorMsg(res);
+		return false;
+	}
+
+	mock = Mock.mock({
+		"total": 50,
+		"list": [
+			{
+		        "orderNo": "123456",
+		        "address": "发货地址111",
+		        "orderStatus": 1,
+		        "driverName": "司机嘟嘟",
+		        "driverPhone": "13612541414",
+		        "phone": "发货15880274595",
+		        "receiversInfoList": [
+		          {
+		            "address": "近江时代大厦",
+		            "userName": "收货商家1"
+		          },
+		          {
+		            "address": "近江时代大厦222",
+		            "userName": "收货商家222"
+		          }
+		        ]
+		      },
+		      {
+		        "orderNo": "2223456",
+		        "address": "发货地址111",
+		        "orderStatus": 2,
+		        "driverName": "司机嘟嘟",
+		        "driverPhone": "13612541414",
+		        "phone": "发货15880274595",
+		        "receiversInfoList": [
+		          {
+		            "address": "近江时代大厦",
+		            "userName": "收货商家1"
+		          },
+		          {
+		            "address": "近江时代大厦222",
+		            "userName": "收货商家222"
+		          }
+		        ]
+      		}
+		],
+		"pageNo": 1,
+	    "pageSize": 10
+	});
+
+	//返回结果给ajax
+	res.send({
+		'resultCode': '0',
+		resultData: mock,
+		"resultDesc": "请求失败"
+	});
+	//关闭请求
+	res.end();
+});
 
 module.exports = router;
