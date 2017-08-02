@@ -77,7 +77,7 @@ router.post('/repairbill/status', function(req, res, next) {
 });
 
 /* 商家名称模糊搜索 */
-router.get('/sender/fuzzyQuery', function(req, res, next) {
+router.post('/sender/fuzzyQuery', function(req, res, next) {
 	var _data = req.body,
 		mock = null;
 	console.log(_data) //可以在控制台看到我们传给后端的参数
