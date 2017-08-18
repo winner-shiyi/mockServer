@@ -47,6 +47,34 @@ router.get('/', function(req, res, next) {
 	});
 });
 
+router.post('/login', function(req, res, next) {
+	var _data = req.body,
+		mock = null;
+
+	if (_data.error) {
+		notifierMsg.errorMsg(res);
+		return false;
+	}
+
+	mock = Mock.mock({
+		"number|1-100": 1,
+		"count": 100,
+		"list|3-40": [{
+			"userId": 910856,
+		}]
+	});
+
+	//返回结果给ajax
+	res.send({
+		'resultCode': '0',
+		resultData: {
+			mock,
+		},
+	});
+	//关闭请求
+	res.end();
+});
+
 /* 我的关注列表 */
 router.post('/repairbill/status', function(req, res, next) {
 	var _data = req.body,
@@ -77,7 +105,7 @@ router.post('/repairbill/status', function(req, res, next) {
 });
 
 /* 商家名称模糊搜索 */
-router.get('/sender/fuzzyQuery', function(req, res, next) {
+router.post('/sender/fuzzyQuery', function(req, res, next) {
 	var _data = req.body,
 		mock = null;
 	console.log(_data) //可以在控制台看到我们传给后端的参数
@@ -113,7 +141,7 @@ router.get('/sender/fuzzyQuery', function(req, res, next) {
 	res.send({
 		'resultCode': '0',
 		resultData: mock,
-		"resultDesc": "请求失败"
+		"resultDesc": "请模糊搜索求失败啦啦啦"
 	});
 	//关闭请求
 	res.end();
@@ -124,7 +152,7 @@ router.post('/order/create', function(req, res, next) {
 		mock = null;
 	// console.log(_data) //可以在控制台看到我们传给后端的参数
 	if (_data.error) {
-		notifierMsg.errorMsg(res);
+		// notifierMsg.errorMsg(res);
 		return false;
 	}
 
@@ -136,7 +164,7 @@ router.post('/order/create', function(req, res, next) {
 	res.send({
 		'resultCode': '0',
 		resultData: [],
-		"resultDesc": "SUCCESS"
+		"resultDesc": "新建任务请求失败咯"
 	});
 	//关闭请求
 	res.end();
@@ -199,7 +227,7 @@ router.post('/order/list', function(req, res, next) {
 	res.send({
 		'resultCode': '0',
 		resultData: mock,
-		"resultDesc": "SUCCESS"
+		"resultDesc": "任务列表页失败咯"
 	});
 	//关闭请求
 	res.end();
@@ -261,12 +289,44 @@ router.post('/order/cancel', function(req, res, next) {
 
 	//返回结果给ajax
 	res.send({
-		'resultCode': '0',
+		'resultCode': '000',
 		resultData: mock,
-		"resultDesc": "请求失败"
+		"resultDesc": "取消订单请求失败"
 	});
 	//关闭请求
 	res.end();
 });
+
+/* 取消订单 */
+router.post('/order/import', function(req, res, next) {
+	var _data = req.body,
+		mock = null;
+	console.log(_data) //可以在控制台看到我们传给后端的参数
+	if (_data.error) {
+		notifierMsg.errorMsg(res);
+		return false;
+	}
+
+	mock = Mock.mock({
+		"errorOrderNo": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ],
+        "successCount": 0
+	});
+
+	//返回结果给ajax
+	res.send({
+		'resultCode': '0',
+		resultData: mock,
+		"resultDesc": "导入失败，不要气馁"
+	});
+	//关闭请求
+	res.end();
+});
+
+
 
 module.exports = router;
