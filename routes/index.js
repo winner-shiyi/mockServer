@@ -104,6 +104,7 @@ router.post('/repairbill/status', function(req, res, next) {
 	res.end();
 });
 
+
 /* 商家名称模糊搜索 */
 router.post('/sender/fuzzyQuery', function(req, res, next) {
 	var _data = req.body,
@@ -146,6 +147,7 @@ router.post('/sender/fuzzyQuery', function(req, res, next) {
 	//关闭请求
 	res.end();
 });
+
 /* 提交新建车配任务*/
 router.post('/order/create', function(req, res, next) {
 	var _data = req.body,
@@ -202,8 +204,26 @@ router.post('/order/list', function(req, res, next) {
 		      },
 		      {
 		        "orderNo": "2223456",
-		        "address": "发货地址111",
+		        "address": "发货地址222",
 		        "orderStatus": 2,
+		        "driverName": "司机嘟嘟",
+		        "driverPhone": "13612541414",
+		        "phone": "发货15880274595",
+		        "receiversInfoList": [
+		          {
+		            "address": "近江时代大厦",
+		            "userName": "收货商家1"
+		          },
+		          {
+		            "address": "近江时代大厦222",
+		            "userName": "收货商家222"
+		          }
+		        ]
+      		},
+      		{
+		        "orderNo": "54743456",
+		        "address": "发货地址333",
+		        "orderStatus": 0,
 		        "driverName": "司机嘟嘟",
 		        "driverPhone": "13612541414",
 		        "phone": "发货15880274595",
@@ -297,7 +317,7 @@ router.post('/order/cancel', function(req, res, next) {
 	res.end();
 });
 
-/* 取消订单 */
+/* 批量导入订单 */
 router.post('/order/import', function(req, res, next) {
 	var _data = req.body,
 		mock = null;
@@ -327,6 +347,34 @@ router.post('/order/import', function(req, res, next) {
 	res.end();
 });
 
+/* 下载excel模板 */
+router.post('/order/downExcel', function(req, res, next) {
+	var _data = req.body,
+		mock = null;
+
+	if (_data.error) {
+		notifierMsg.errorMsg(res);
+		return false;
+	}
+
+	mock = Mock.mock({
+		"errorOrderNo": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ],
+        "successCount": 0
+	});
+
+	//返回结果给ajax
+	res.send({
+		'size': 8397,
+		'type': 'application/octet-stream'
+	});
+	//关闭请求
+	res.end();
+});
 
 
 module.exports = router;
