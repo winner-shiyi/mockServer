@@ -152,62 +152,29 @@ router.post('/order/list', function(req, res, next) {
 	}
 
 	mock = Mock.mock({
-		"total": 50,
-		"list": [
+		"total": 10,
+		"list|10": [
 			{
-		        "orderNo": "123456",
+		        "orderNo": /\d\w{5,10}/, // 因为用订单号作为table每行的key了，记得不能是一样的值
 		        "address": "发货地址111",
-		        "orderStatus": 1,
+		        "orderStatus|1-5": 1, // 如果约定的格式是字符串的话，使用正则/^[1-6]$/
 		        "driverName": "司机嘟嘟",
 		        "driverPhone": "13612541414",
-		        "phone": "发货15880274595",
+		        "phone": "15880274595",
 		        "orderTime":"1503540843000",
 		        "receiversInfoList": [
 		          {
-		            "address": "近江时代大厦",
-		            "userName": "收货商家1"
+		            "address": "三新家园",
+		            "userName": "收货商家111",
+		            "shopName": "牛焱火锅发货发过鸡飞狗叫更何况更何况就回来就回来了就回来会老回来回家冷静"
 		          },
 		          {
-		            "address": "近江时代大厦222",
-		            "userName": "收货商家222"
-		          }
-		        ]
-		      },
-		      {
-		        "orderNo": "2223456",
-		        "address": "发货地址222",
-		        "orderStatus": 2,
-		        "driverName": "司机嘟嘟",
-		        "driverPhone": "13612541414",
-		        "phone": "发货15880274595",
-		        "orderTime":"1503540843000",
-		        "receiversInfoList": [
-		          {
 		            "address": "近江时代大厦",
-		            "userName": "收货商家1"
-		          },
-		          {
-		            "address": "近江时代大厦222",
-		            "userName": "收货商家222"
+		            "userName": "收货商家222",
+		            "shopName": "大食堂"
 		          }
 		        ]
-      		},
-      		{
-		        "orderNo": "54743456",
-		        "address": "发货地址333",
-		        "orderStatus": 5,
-		        "driverName": "司机嘟嘟",
-		        "driverPhone": "13612541414",
-		        "phone": "发货15880274595",
-		        "orderTime":"",
-		        "receiversInfoList": [
-		          {
-		            "address": "近江时代大厦",
-		            "userName": "收货商家1",
-		            "shopName": "aaaa"
-		          }
-		        ]
-      		}
+			}
 		],
 		"pageNo": 1,
 	    "pageSize": 10
@@ -525,6 +492,38 @@ router.post('/order/cardInfo', function(req, res, next) {
 			},
 			{
 			    "receiverFlag": true,
+			    "shopName": "外婆家",
+			    "userName": "吴姐",
+			    "province": "浙江省",
+			    "city": "杭州市",
+			    "area": "萧山区",
+			    "addressDetail": "银隆百货主楼B楼第二层商铺B213-B216号  ",
+			    "hasArrived": false,
+			    "hasLeft": true,
+			    "serialNumber": 1,
+			    "leaveTime": 1508554560000,
+			    "arriveTime": 1483236900000,
+			    "actualLeaveAddress": "浙江省杭州市江干区九堡镇沙县",
+			    "actualArriveAddress": "浙江省杭州市江干区九堡镇沙县小吃(八堡家园南)八堡家园"
+			},
+			{
+			    "receiverFlag": true,
+			    "shopName": "好吃的新白鹿 ",
+			    "userName": "吴姐",
+			    "province": "浙江省",
+			    "city": "杭州市",
+			    "area": "萧山区",
+			    "addressDetail": "银隆百货主楼B楼第二层商铺B213-B216号  ",
+			    "hasArrived": true,
+			    "hasLeft": false,
+			    "serialNumber": 1,
+			    "leaveTime": null,
+			    "arriveTime": 1483236900000,
+			    "actualLeaveAddress": "浙江省杭州市江干区九堡镇沙县小吃(八堡家园南)八堡家园",
+			    "actualArriveAddress": "浙江省杭州市江干区九堡镇沙县小吃(八堡家园南)八堡家园"
+			},
+			{
+			    "receiverFlag": true,
 			    "shopName": "绿茶萧山店 ",
 			    "userName": "吴姐",
 			    "province": "浙江省",
@@ -534,9 +533,9 @@ router.post('/order/cardInfo', function(req, res, next) {
 			    "hasArrived": true,
 			    "hasLeft": true,
 			    "serialNumber": 1,
-			    "leaveTime": 1483323600000,
+			    "leaveTime": 1503696703000,
 			    "arriveTime": 1483236900000,
-			    "actualLeaveAddress": "浙江省杭州市江干区九堡镇沙县小吃(八堡家园南)八堡家园",
+			    "actualLeaveAddress": "浙江省杭州市江干区九堡镇沙县",
 			    "actualArriveAddress": "浙江省杭州市江干区九堡镇沙县小吃(八堡家园南)八堡家园"
 			},
 		]
